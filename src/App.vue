@@ -85,8 +85,8 @@
   </v-app>
 </template>
 
-<script>
-import ExposeChecker from './components/ExposeChecker';
+<script lang="ts">
+import ExposeChecker from './components/ExposeChecker.vue';
 
 export default {
   name: 'App',
