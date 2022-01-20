@@ -98,19 +98,25 @@
           <v-radio key="android" label="Android" value="android"></v-radio>
         </v-radio-group>
       </v-row>
-      <v-row >
-
+      <v-row>
             <v-textarea 
+              v-if="os === 'ios'"
               v-model=exposeJsonText
               outlined
               label="ここにログファイルをペーストしてください">
             </v-textarea>
+            <div v-else>
+              <p>
+                接触通知のログjsonファイルをアップロードしてください。(サーバーには送信はしません)
+              </p>
+              <input type="file" accept="application/json" @change="onFileChange" />
+            </div>
       </v-row>
       <p class="text-caption">
         <span class="d-inline-block">本ツールは、スマホ内で処理しているため、</span>
         <span class="d-inline-block">ここでペーストしたデータが外部に流出することはありません。</span>
       </p>
-      <v-row class="mb-10 justify-center">
+      <v-row v-if="os === 'ios'" class="mb-10 justify-center">
         <v-col cols="6"> 
           <v-btn
                 v-on:click="clearJson">
@@ -277,6 +283,21 @@
       showNotes: function(){
         this.panel = [0]
       },
+      onFileChange: function (e){
+        const self = this;
+        const { files } = e.target
+        if (files.length <= 0) {
+          return
+        }
+
+        const file = files[0]
+        const reader = new FileReader()
+        reader.onload = function () {
+          self.exposeJsonText = reader.result
+          self.checkJson()
+        }
+        reader.readAsText(file)
+      }
     },
     data: function(){
       return {
