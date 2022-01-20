@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "esnext",
+    "target": "es2017",
     "module": "esnext",
     "strict": true,
     "jsx": "preserve",
@@ -12,7 +12,19 @@
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "baseUrl": ".",
+    "incremental": true,  // 差分ビルドを有効に
+    "removeComments": false,  // コメントを残す
+    "forceConsistentCasingInFileNames": true,  // ファイル名の大文字小文字に一貫性がないときにエラーにする
+    "noImplicitThis": true,  // Vetur で this の補完を有効にする
+    // ↓↓↓ がんばらない TypeScript
+    "noImplicitAny": false,
+    "strictNullChecks": false,
+    "strictFunctionTypes": false,
+    "strictBindCallApply": false,
+    "strictPropertyInitialization": false,
+    // ↑↑↑
     "types": [
+      "vuetify",
       "webpack-env"
     ],
     "paths": {
