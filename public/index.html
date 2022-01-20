@@ -1,31 +1,42 @@
 <!DOCTYPE html>
 <html lang="ja">
   <head>
+
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+
+    <!-- Meta -->
+    <title>COCOAログチェッカー</title>
+    <meta name="description" content="iOS/Androidの約2週間の接触通知のログを解析し、自分の周りに陽性者が何人いたかを表示します。">
+    <link rel="canonical" href="https://cocoa-log-checker.com/">
+
+    <!-- OGP -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="COCOAログチェッカー">
+    <meta property="og:title" content="COCOAログチェッカー | 1分でできる接触通知ログ解析">
+    <meta property="og:description" content="iOS/Androidの約2週間の接触通知のログを解析し、自分の周りに陽性者が何人いたかを表示します。">
+    <meta property="og:url" content="https://cocoa-log-checker.com">
+    <meta property="og:image" content="https://cocoa-log-checker.s3.ap-northeast-1.amazonaws.com/twitter-card.jpg?2">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:creator" content="@ktansai">
+
+    <!-- WebFont -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css">
+
+    <!-- PWACompat -->
+    <script async src="https://cdn.jsdelivr.net/npm/pwacompat"></script>
+
+    <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-S63S935HFP"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
     </script>
-
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <link rel="apple-touch-icon" href="<%= BASE_URL %>webclip.png">
-    <meta name="apple-mobile-web-app-title" content="COCOAログ解析">
-
-    <title>COCOAログチェッカー</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css">
-
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:creator" content="@ktansai">
-
-    <meta property="og:url" content="https://cocoa-log-checker.com"/> 
-    <meta property="og:title" content="COCOAログチェッカー | 1分でできる接触通知ログ解析" />
-    <meta property="og:description" content="iOS/Androidの内の約2週間の接触通知のログを解析し、自分の周りに陽性者が何人いたかを表示します。" /> 
-    <meta property="og:image" content="https://cocoa-log-checker.s3.ap-northeast-1.amazonaws.com/twitter-card.jpg?2" /> 
-
-
 
   </head>
   <body>

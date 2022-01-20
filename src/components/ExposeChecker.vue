@@ -201,98 +201,95 @@ import Vue from 'vue';
 
 export default Vue.extend({
   name: 'ExposeChecker',
-  methods: {
-    checkJson() {
-      this.$gtag.event("checkJson")
-
-      const explainTextZeroContact= "本結果はCOCOA上の新規陽性登録者との接触検知のみが対象です。<br>無症状感染者やCOCOAの陽性登録をしていない感染者と近くにいた可能性はありますので、引き続き感染症対策を万全を期すことをおすすめします。"
-
-      try {
-        if (this.os === "ios") {
-          const exposeData = JSON.parse( this.exposeJsonText)
-          const exposeDataArray = exposeData.ExposureChecks
-
-          let matchedExposures = []
-          exposeDataArray.forEach(checkItem => {
-            checkItem.Files.forEach(file => {
-              if(file.MatchCount !== 0){
-                delete file.Timestamp
-                matchedExposures.push(file)
-              }
-            });
-          });
-          this.resultJsonText = matchedExposures.map(e => JSON.stringify(e,null,2)).join("\n")
-          if (matchedExposures.length === 0){
-            this.resultText = "新規陽性登録者が近くにいた記録はありませんでした。"
-            this.explainText = explainTextZeroContact
-          }else{
-            this.resultText = `${matchedExposures.length}件の新規陽性登録者が近くにいた記録が確認されました。`
-          }
-        } else if (this.os === "android") {
-          const exposeData = JSON.parse(this.exposeJsonText)
-          const matchedExposures = exposeData.reduce((acc, exposure) => {
-            if (exposure.matchesCount !== 0) {
-              delete exposure.timestamp
-              acc.push(exposure)
-            }
-            return acc
-          }, [])
-
-          if (matchedExposures.length === 0) {
-            this.resultText = "新規陽性登録者が近くにいた記録はありませんでした。"
-            this.explainText = explainTextZeroContact
-          } else {
-            this.resultText = `${matchedExposures.length}件の新規陽性登録者が近くにいた記録が確認されました。`
-            this.resultJsonText = matchedExposures.map(e => JSON.stringify(e,null,2)).join("\n")
-          }
-        }
-      } catch (error) {
-        alert("データフォーマットエラー");
-      }
-    },
-    clearJson() {
-      this.exposeJsonText = ""
-    },
-    addCalendarLog() {
-      this.$gtag.event("addCalendar")
-    },
-    showNotes() {
-      this.panel = [0]
-    },
-    onFileChange(e) {
-      const self = this;
-      const { files } = e.target
-      if (files.length <= 0) {
-        return
-      }
-
-      const file = files[0]
-      const reader = new FileReader()
-      reader.onload = function () {
-        self.exposeJsonText = reader.result
-        self.checkJson()
-      }
-      reader.readAsText(file)
-    }
-  },
   data() {
     return {
       os: 'ios',
-      resultJsonText: "",
-      resultText: "",
-      exposeJsonText: "",
-      explainText: "",
-      panel:[],
+      resultJsonText: '',
+      resultText: '',
+      exposeJsonText: '',
+      explainText: '',
+      panel: [],
     }
   },
   computed: {
     nextDate() {
-      const today = new Date()
-      const nextStartDate = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000).toISOString().replace(/-|:|T\d{2}:\d{2}:\d{2}\.\d{3}Z/g, "") + "T180000"
-      const nextEndDate = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000).toISOString().replace(/-|:|T\d{2}:\d{2}:\d{2}\.\d{3}Z/g, "") + "T190000"
-      const result = `${nextStartDate}/${nextEndDate}`
-      return result
+      const today = new Date();
+      const nextStartDate = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000).toISOString().replace(/-|:|T\d{2}:\d{2}:\d{2}\.\d{3}Z/g, '') + 'T180000';
+      const nextEndDate = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000).toISOString().replace(/-|:|T\d{2}:\d{2}:\d{2}\.\d{3}Z/g, '') + 'T190000';
+      const result = `${nextStartDate}/${nextEndDate}`;
+      return result;
     },
+  },
+  methods: {
+    checkJson() {
+      this.$gtag.event('checkJson');
+
+      const explainTextZeroContact= '本結果はCOCOA上の新規陽性登録者との接触検知のみが対象です。<br>無症状感染者やCOCOAの陽性登録をしていない感染者と近くにいた可能性はありますので、引き続き感染症対策を万全を期すことをおすすめします。';
+
+      try {
+        if (this.os === 'ios') {
+          const exposeData = JSON.parse( this.exposeJsonText);
+          const exposeDataArray = exposeData.ExposureChecks;
+
+          let matchedExposures = [];
+          exposeDataArray.forEach(checkItem => {
+            checkItem.Files.forEach(file => {
+              if(file.MatchCount !== 0){
+                delete file.Timestamp;
+                matchedExposures.push(file);
+              }
+            });
+          });
+          this.resultJsonText = matchedExposures.map(e => JSON.stringify(e,null,2)).join('\n');
+          if (matchedExposures.length === 0){
+            this.resultText = '新規陽性登録者が近くにいた記録はありませんでした。';
+            this.explainText = explainTextZeroContact;
+          } else {
+            this.resultText = `${matchedExposures.length}件の新規陽性登録者が近くにいた記録が確認されました。`;
+          }
+        } else if (this.os === 'android') {
+          const exposeData = JSON.parse(this.exposeJsonText);
+          const matchedExposures = exposeData.reduce((acc, exposure) => {
+            if (exposure.matchesCount !== 0) {
+              delete exposure.timestamp;
+              acc.push(exposure);
+            }
+            return acc;
+          }, []);
+
+          if (matchedExposures.length === 0) {
+            this.resultText = '新規陽性登録者が近くにいた記録はありませんでした。';
+            this.explainText = explainTextZeroContact;
+          } else {
+            this.resultText = `${matchedExposures.length}件の新規陽性登録者が近くにいた記録が確認されました。`;
+            this.resultJsonText = matchedExposures.map(e => JSON.stringify(e,null,2)).join('\n');
+          }
+        }
+      } catch (error) {
+        alert('データフォーマットエラー');
+      }
+    },
+    clearJson() {
+      this.exposeJsonText = '';
+    },
+    addCalendarLog() {
+      this.$gtag.event('addCalendar');
+    },
+    showNotes() {
+      this.panel = [0];
+    },
+    onFileChange(event) {
+      const { files } = event.target;
+      if (files.length <= 0) return;
+
+      const file = files[0];
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.exposeJsonText = reader.result as string;
+        this.checkJson();
+      }
+      reader.readAsText(file);
+    }
   }
 });
 </script>

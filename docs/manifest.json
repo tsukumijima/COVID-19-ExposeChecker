@@ -1,0 +1,1 @@
+{"name":"COCOAログチェッカー","short_name":"COCOAログ解析","theme_color":"#FD8865","icons":[{"src":"img/icons/icon.png","sizes":"192x192","type":"image/png"},{"src":"img/icons/icon-maskable.png","sizes":"192x192","type":"image/png","purpose":"maskable"}],"start_url":".","display":"standalone","background_color":"#FD8865","description":"iOS/Androidの約2週間の接触通知のログを解析し、自分の周りに陽性者が何人いたかを表示します。"}
